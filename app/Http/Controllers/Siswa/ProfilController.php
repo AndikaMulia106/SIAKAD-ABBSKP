@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Siswa;
 
 use App\Http\Controllers\Controller;
 use App\Models\Nilai;
-use App\Models\Presensi;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class ProfilController extends Controller
@@ -23,27 +23,44 @@ class ProfilController extends Controller
                     ->with('mapel')
                     ->get();
 
-        $presensi = Presensi::where('siswa_id', $siswa->id)
-                        ->selectRaw('COUNT(*) as total, 
-                                    SUM(CASE WHEN status = "hadir" THEN 1 ELSE 0 END) as hadir')
-                        ->first();
-
-        return view('siswa.profil', compact('siswa', 'nilais', 'presensi'));
+        return view('siswa.profil', compact('siswa', 'nilais'));
     }
 
     /**
-     * Ubah password
+     * Edit profil siswa
      */
-    public function updatePassword(Request $request)
+    public function edit()
     {
+        $siswa = Auth::user()->siswa;
+        if (!$siswa) {
+            abort(404, 'Data siswa tidak ditemukan');
+        }
+        return view('siswa.editProfil', compact('siswa'));
+    }
+
+    /**
+     * Update profil siswa dan password
+     */
+    public function update(Request $request)
+    {
+        $siswa = Auth::user()->siswa;
+        if (!$siswa) {
+            abort(404, 'Data siswa tidak ditemukan');
+        }
         $request->validate([
-            'password' => 'required|confirmed|min:8'
+            'nama' => 'required|string|max:255',
+            'email' => 'required|email',
+            'nis' => 'required|string',
+            'jenis_kelamin' => 'required|in:L,P',
+            'password' => 'nullable|confirmed|min:8',
         ]);
-
-        Auth::user()->update([
-            'password' => bcrypt($request->password)
-        ]);
-
-        return back()->with('success', 'Password berhasil diubah!');
+        $siswa->update($request->only('nama', 'email', 'nis', 'jenis_kelamin'));
+        // Update password jika diisi
+        if ($request->filled('password')) {
+            $siswa->user->update([
+                'password' => bcrypt($request->password)
+            ]);
+        }
+        return redirect()->route('siswa.profil')->with('success', 'Profil berhasil diperbarui!');
     }
 }

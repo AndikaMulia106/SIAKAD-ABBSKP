@@ -47,6 +47,7 @@ class SiswaSeeder extends Seeder
                     'email'         => $siswa['email'],
                     'kelas_id'      => $siswa['kelas_id'],
                     'jenis_kelamin' => $siswa['jenis_kelamin'],
+                    'password'     => $siswa['password'],
                 ]
             );
         }

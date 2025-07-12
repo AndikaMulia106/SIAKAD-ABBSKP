@@ -67,7 +67,7 @@
             ];
         @endphp
 
-        <h2 class="font-bold text-lg mt-8 mb-2">Aktivitas Terkini</h2>
+        <h2 class="font-bold text-lg mt-8 mb-2">Pengumuman</h2>
         @for($i = 0; $i < 3; $i++)
         <div class="mb-2 flex gap-2 items-center">
             <!-- Icon Dropdown with icon preview -->

@@ -112,7 +112,7 @@ use Illuminate\Support\Facades\Storage;
 
         <!-- Recent Activities -->
         <section class="mb-12">
-            <h2 class="text-2xl font-bold text-gray-800 mb-6">Aktivitas Terkini</h2>
+            <h2 class="text-2xl font-bold text-gray-800 mb-6">Pengumuman</h2>
             <div class="bg-white rounded-lg shadow-md overflow-hidden">
                 <div class="divide-y divide-gray-200">
                     @foreach($activities as $act)

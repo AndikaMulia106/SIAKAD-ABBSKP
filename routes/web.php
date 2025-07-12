@@ -69,6 +69,7 @@ Route::prefix('siswa')
     ->middleware(['auth', 'role:siswa'])
     ->group(function () {
         Route::get('profil', [App\Http\Controllers\Siswa\ProfilController::class, 'show'])->name('siswa.profil');
-        Route::put('update-password', [App\Http\Controllers\Siswa\ProfilController::class, 'updatePassword'])->name('siswa.updatePassword');
+        Route::get('edit-profil', [App\Http\Controllers\Siswa\ProfilController::class, 'edit'])->name('siswa.editProfil');
+        Route::put('update-profil', [App\Http\Controllers\Siswa\ProfilController::class, 'update'])->name('siswa.updateProfil');
     });
 

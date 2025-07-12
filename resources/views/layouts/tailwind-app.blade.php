@@ -113,10 +113,6 @@
                         <i class="fas fa-user"></i>
                         <span class="sidebar-text">Profil Siswa</span>
                     </a>
-                    <a href="{{ route('siswa.nilai') }}" class="sidebar-link {{ request()->routeIs('siswa.nilai') ? 'active' : '' }}">
-                        <i class="fas fa-list-ol"></i>
-                        <span class="sidebar-text">Lihat Nilai</span>
-                    </a>
                 @endif
             </nav>
         </aside>

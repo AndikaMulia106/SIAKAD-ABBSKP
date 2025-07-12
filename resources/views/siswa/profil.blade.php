@@ -8,6 +8,10 @@
         <img src="{{ asset('img/student-icon.png') }}" class="rounded-full mb-4 w-32 h-32 object-cover" alt="Foto Profil">
         <h4 class="text-xl font-bold">{{ $siswa->nama ?? '-' }}</h4>
         <p class="text-gray-500">NIS: {{ $siswa->nis ?? '-' }}</p>
+        <!-- Tombol Edit Profil -->
+        <a href="{{ route('siswa.editProfil') }}" class="mt-4 bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded shadow flex items-center gap-2">
+            <i class="fas fa-edit"></i> Edit Profil
+        </a>
     </div>
     <div class="md:w-2/3">
         <div class="mb-6">
@@ -15,9 +19,6 @@
             <div class="flex flex-wrap gap-8">
                 <div>
                     <span class="font-semibold">Kelas:</span> {{ $siswa->kelas->nama ?? '-' }}
-                </div>
-                <div>
-                    <span class="font-semibold">Kehadiran:</span> {{ $presensi->hadir ?? 0 }} dari {{ $presensi->total ?? 0 }} pertemuan
                 </div>
             </div>
         </div>
